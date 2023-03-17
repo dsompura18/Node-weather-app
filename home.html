@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <!-- style file -->
+        <style>
+        body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Edu VIC WA NT Beginner', cursive;
+}
+.app-box {
+    max-width: 320px;
+    margin: 2% auto;
+    text-align: center;
+    border: 1px solid;
+    padding: 15px;
+    z-index: 1;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #4899cb47
+}
+
+.weathericon {
+    min-height: 200px;
+    position: relative;
+}
+svg.svg-inline--fa.fa-sun {
+    /* width: 55px; */
+    font-size: 50px;
+    /* top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%); */
+    color: orange;
+    animation: zoom 2s ease-out infinite;
+}
+
+svg.svg-inline--fa.fa-cloud{
+    font-size: 50px;
+    /* top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%); */
+    color: #fff;
+    animation: zoom 2s ease-out infinite; 
+
+}
+
+.location h1, .tempinfo h1{
+    margin-bottom: 0;
+}
+.location p, .tempinfo p{
+    margin-top: 0;
+    font-weight: 600;
+}
+
+.svg-waves {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 180px;
+  }
+  @media (max-width: 767px) {
+    .svg-waves {
+      height: 80px;
+    }
+  }
+  
+.svg-waves__parallax > use {
+    -webkit-animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+            animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+  }
+  
+  .svg-waves__parallax > use:nth-child(1) {
+    -webkit-animation-delay: -2s;
+            animation-delay: -2s;
+    -webkit-animation-duration: 7s;
+            animation-duration: 7s;
+    fill: rgba(255, 255, 255, 0.7);
+  }
+  
+  .svg-waves__parallax > use:nth-child(2) {
+    -webkit-animation-delay: -3s;
+            animation-delay: -3s;
+    -webkit-animation-duration: 10s;
+            animation-duration: 10s;
+    fill: rgba(255, 255, 255, 0.5);
+  }
+  
+  .svg-waves__parallax > use:nth-child(3) {
+    -webkit-animation-delay: -4s;
+            animation-delay: -4s;
+    -webkit-animation-duration: 13s;
+            animation-duration: 13s;
+    fill: rgba(255, 255, 255, 0.3);
+  }
+  
+  .svg-waves__parallax > use:nth-child(4) {
+    -webkit-animation-delay: -5s;
+            animation-delay: -5s;
+    -webkit-animation-duration: 20s;
+            animation-duration: 20s;
+    fill: white;
+  }
+
+  .icon {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+  
+  @-webkit-keyframes move-forever {
+    0% {
+      transform: translate3d(-90px, 0, 0);
+    }
+    100% {
+      transform: translate3d(85px, 0, 0);
+    }
+  }
+
+
+@keyframes zoom {
+    0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.5, 1.5);
+  }
+  100% {
+    transform: scale(1, 1);
+    }
+}
+
+  
+  @keyframes move-forever {
+    0% {
+      transform: translate3d(-90px, 0, 0);
+    }
+    100% {
+      transform: translate3d(85px, 0, 0);
+    }
+  }
+        </style>
+         <!-- g-font -->
+         <link rel="preconnect" href="https://fonts.googleapis.com">
+         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+         <link href="https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner&display=swap" rel="stylesheet">
+         <!-- font-awesome -->
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.5.0/css/all.min.css" integrity="sha512-QfDd74mlg8afgSqm3Vq2Q65e9b3xMhJB4GZ9OcHDVy1hZ6pqBJPWWnMsKDXM7NINoKqJANNGBuVRIpIJ5dogfA==" crossorigin="anonymous" referrerpolicy="no-referrer" />    </head>
+    <body>
+        <div class="app-box">
+            <div class="weathericon">
+                <div class="icon">
+                    <i class="fa-solid fa-sun"></i>
+                </div>
+            </div>
+            <div class="location">
+                <h1>
+                    <i class="fa-solid fa-location-dot"></i>
+                    &nbsp;{%city%}, {%country%}
+                </h1>
+                <p id="dateData">Wed|OCT 23| 10:43 AM</p>
+            </div>
+            <div class="tempinfo">
+                <h1>{%tempact%}&deg;C</h1>
+                <p>Min {%tempmin%}&deg;C | Max {%tempmax%}&deg;C</p>
+            </div>
+            <div class="sine-wave">
+                <svg
+                    class="svg-waves"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 24 150 28"
+                    preserveAspectRatio="none"
+                    shape-rendering="auto"
+                >
+                    <defs>
+                        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
+                    </defs>
+                    <g class="svg-waves__parallax">
+                        <use xlink:href="#gentle-wave" x="48" y="0"></use>
+                        <use xlink:href="#gentle-wave" x="48" y="3"></use>
+                        <use xlink:href="#gentle-wave" x="48" y="5"></use>
+                        <use xlink:href="#gentle-wave" x="48" y="7"></use>
+                    </g>
+                </svg>
+            </div>
+        </div>
+
+        <!-- script file -->
+        <script>
+            var a = new Date();
+var realDay="", realDate="", realMonth="", realTime="";
+function myDate(){
+    let day = a.getDate();
+    // console.log(day);
+    realDate = day;
+}
+
+function myDay() {
+    var weekdays = new Array(7);
+    weekdays[0] = "Sun";
+    weekdays[1] = "Mon";
+    weekdays[2] = "Tue";
+    weekdays[3] = "Wed";
+    weekdays[4] = "Thu";
+    weekdays[5] = "Fri";
+    weekdays[6] = "Sat";
+    var r = weekdays[a.getDay()];
+    // document.getElementById("myId").innerHTML = r;
+    // console.log(r);
+    realDay = r;
+}
+
+function myMonth(){
+    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"];
+
+    let month = months[a.getMonth()];
+    // console.log(month);
+    realMonth = month;
+}
+
+function myTime(){
+   let hour = a.getHours();
+   let min = a.getMinutes(); 
+   let period = "AM"
+   if(hour > 11){
+    period = "PM";
+    if(hour > 12) hour -=12;
+   }
+   if(min < 10 ){
+        min = "0" + min;
+    }
+    realTime = hour + ":" + min + period;
+}
+myDay();
+myDate();
+myMonth();
+myTime();
+
+var dateData = `${realDay} | ${realMonth} ${realDate} | ${realTime}`;
+// console.log(dateData);
+
+document.getElementById("dateData").innerHTML = `${dateData}`;
+
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/all.min.js"></script>
+    </body>
+</html>
